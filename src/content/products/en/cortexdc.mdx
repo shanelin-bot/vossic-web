@@ -1,26 +1,98 @@
 ---
 name: CortexDC
-tagline: The integrated monitoring brain for equipment rooms and data centers
-summary: Centralizes power, environment, and device monitoring for equipment rooms, closing the gap where traditional DCIM is too heavy for mid-size deployments — so your room's health is visible at a glance.
+tagline: One unified topology, see your entire data center
+summary: Consolidates IT infrastructure, OT facility management, and compliance into a single platform — replacing 3–6 disparate tools with one graph-analytics engine that shifts operations from reactive to proactive.
 order: 2
 screenshot: /images/products/slider04.jpg
 painPoints:
-  - Scattered equipment from mixed vendors with no unified monitoring interface
-  - Traditional DCIM is too costly and complex for small and mid-size rooms
-  - Alerts are fragmented across devices, making real-time aggregation and tracking difficult
+  - IT teams use Zabbix, Prometheus, and vCenter; OT teams use Modbus, BACnet, and MQTT; security, compliance, access control, and CCTV all operate in separate silos.
+  - Traditional DCIM requires stitching together 3–6 platforms, creating data duplication, cost stacking, and manual root cause analysis via Excel spreadsheets.
+  - Cross-silo impact tracing is impossible — a device failure cannot be linked to affected business services in real time.
+  - PoC cycles stretch to months; customers cannot wait.
 features:
-  - title: Centralized room monitoring
-    desc: Power, temperature/humidity, and device status converged into one interface — full room health in a single view.
-  - title: Right-sized for mid-scale rooms
-    desc: Supports deployments covering key equipment sets, lowering the barrier to adoption and total cost.
-  - title: Alert aggregation & tracking
-    desc: Cross-device alerts managed centrally, with full traceability from detection to resolution.
-  - title: Seamless BMS integration
-    desc: Room-level data can be pushed up to the building BMS, completing the view from floor to rack.
+  - title: Multi-protocol, single-source data collection
+    desc: 8 major protocols (Redfish, SNMP, IPMI, Modbus, BACnet, MQTT, SSH, RTSP) + 18 gRPC microservice collectors. Device Schema supports no-code extension — new device types require zero development cycles.
+  - title: Visualized data center management
+    desc: Master dashboard, dual-side rack views, floor plan canvas, zone KPI panels, and hot/cold aisle visualization — all in one interface.
+  - title: Graph analytics engine (flagship)
+    desc: "Apache AGE graph database powers asset topology covering racks, services, power, networks, and contracts. Three simultaneous analyses: impact, correlation, and root cause — one graph answers three questions."
+  - title: Access control & audit
+    desc: 4-level RBAC, API Key credentials, operation audit logs, and automatic lockout on failed logins. Built for compliance from day one.
+  - title: Rules engine & automation
+    desc: Event-triggered actions, workflow templates, and an AI scheduling assistant that shifts team effort from alert handling to decision-making.
+  - title: Fast deployment & scalability
+    desc: Docker Compose All-in-One deploys in ~2 hours (8 cores + 16GB minimum). Distributed microservices for scale. Interface in Traditional Chinese, English, and Japanese.
 useCases:
+  - IT Foundation Package — unified visibility across servers, virtualization, and networking
+  - OT On-Site Package — integrated power, HVAC, sensors, and CCTV management
   - Enterprise on-premises and edge equipment rooms
   - Government data centers
-  - Equipment rooms requiring integration into building management
+  - Mixed IT + OT facilities requiring unified management
 ---
 
-CortexDC is Vossic's productized data center management capability — designed for the "mixed vendors, heavy tools, scattered alerts" pain points common in mid-size equipment rooms, so operations no longer depend on multiple independent toolsets.
+## The invisible half of your data center is slowing your entire business
+
+IT has its tools. OT has its tools. Security, compliance, and access control each have their own. When something breaks, engineers jump between 3–6 platforms and piece together the answer from experience and spreadsheets. CortexDC was built to end that.
+
+---
+
+## Graph analytics: one graph, three analyses at once
+
+CortexDC's flagship capability. Powered by the Apache AGE graph database, it consolidates racks, services, power paths, networks, and contracts into a single queryable topology — supporting three simultaneous analysis modes:
+
+**Impact Analysis**
+If one device goes down, which business services are affected? Traces downstream dependencies in seconds to calculate blast radius.
+
+**Correlation Analysis**
+Maps service / asset / rack / power dependencies and shared risk points. Informs redundancy planning and maintenance strategies.
+
+**Root Cause Analysis**
+Backtracks from an alert through the event chain to identify the source node. Automatically generates incident reports.
+
+---
+
+## 8 protocols, 18 collectors
+
+| Protocol | Target |
+|----------|--------|
+| Redfish (HTTPS) | iLO / iDRAC / BMC server hardware |
+| SNMP v1/v2c/v3 | Switches / PDU / UPS |
+| IPMI / RMCP | Server BMC |
+| Modbus TCP | PDU / environmental sensors |
+| BACnet/IP | HVAC / power systems |
+| MQTT | IoT sensors |
+| SSH | Network equipment CLI |
+| RTSP | IP Camera video streams |
+
+---
+
+## 4-week PoC: from environment to executive briefing
+
+A standardized PoC template — from deployment to boardroom presentation in four weeks:
+
+**Week 1 — Environment Setup**: Hardware acceptance, container deployment, TLS certificates, RBAC planning
+
+**Week 2 — Protocol Ingestion**: Redfish iLO/iDRAC, SNMP switches, Modbus PDU, MQTT IoT sensors
+
+**Week 3 — Canvas & Topology**: Floor plan canvas, rack front/rear views, asset relationships, IP management
+
+**Week 4 — Reporting & Briefing**: Compliance reports, impact analysis, incident reports, executive demo
+
+---
+
+## Two packages, two customer types
+
+**IT Foundation Package** — Single-pane-of-glass IT infrastructure visibility
+For customers whose primary need is unified visibility across servers, virtualization, and network devices.
+
+**OT On-Site Package** — From PLC to UPS: one unified view
+For customers with distributed power, HVAC, sensors, and CCTV that need IT + OT integration.
+
+Both packages can be deployed independently and merged into a full platform post-deployment.
+
+---
+
+## Contact sales
+
+- Sales inquiries: sales@vossic.com.tw
+- Technical support: support@vossic.com.tw
