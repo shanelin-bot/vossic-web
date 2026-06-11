@@ -4,42 +4,243 @@
 
 <div class="space-y-24">
 
-  <!-- 圖分析引擎 -->
+  <!-- 圖分析引擎：左文右動圖 -->
   <section class="mx-auto max-w-6xl px-6">
-    <div class="mb-10 text-center">
+    <div class="mb-12 text-center">
       <p class="readout text-brand-2">GRAPH ANALYTICS ENGINE</p>
-      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx">一張圖，同時回答三個問題</h2>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx md:text-4xl">一張圖，同時回答三個問題</h2>
       <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tx-muted">
         基於 Apache AGE 圖資料庫，將機架、服務、電力、網路、合約收斂成一張可查詢的拓樸圖。
       </p>
     </div>
-    <div class="grid gap-5 md:grid-cols-3">
-      <div class="rounded-2xl border border-line-light bg-bg p-7 shadow-sm">
-        <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
-          <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/></svg>
+
+    <div class="grid items-center gap-10 md:grid-cols-2">
+      <!-- 左：三種模式說明，會跟著動畫高亮 -->
+      <div class="space-y-4" id="graph-modes">
+        <div class="graph-mode-card active rounded-2xl border-2 border-brand bg-brand/5 p-6 transition-all duration-500" data-mode="0">
+          <div class="flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">01</span>
+            <div>
+              <h3 class="font-semibold text-tx">衝擊分析</h3>
+              <p class="text-sm font-medium text-brand">Impact Analysis</p>
+            </div>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-tx-muted">一台設備下線，哪些業務服務會受影響？數秒內追蹤下游依賴，計算影響範圍。</p>
         </div>
-        <h3 class="text-lg font-semibold text-tx">衝擊分析</h3>
-        <p class="mt-1 text-sm font-medium text-brand">Impact Analysis</p>
-        <p class="mt-3 leading-relaxed text-tx-muted">一台設備下線，哪些業務服務會受影響？數秒內追蹤下游依賴，計算影響範圍。</p>
+        <div class="graph-mode-card rounded-2xl border-2 border-line-light bg-bg p-6 transition-all duration-500" data-mode="1">
+          <div class="flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-bg-3 text-xs font-bold text-tx-muted">02</span>
+            <div>
+              <h3 class="font-semibold text-tx">關聯分析</h3>
+              <p class="text-sm font-medium text-tx-muted">Correlation Analysis</p>
+            </div>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-tx-muted">服務 / 資產 / 機架 / 電力路徑的相依關係，為備援規劃與維護策略提供依據。</p>
+        </div>
+        <div class="graph-mode-card rounded-2xl border-2 border-line-light bg-bg p-6 transition-all duration-500" data-mode="2">
+          <div class="flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-bg-3 text-xs font-bold text-tx-muted">03</span>
+            <div>
+              <h3 class="font-semibold text-tx">根因分析</h3>
+              <p class="text-sm font-medium text-tx-muted">Root Cause Analysis</p>
+            </div>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-tx-muted">從告警反向追蹤事件鏈，自動定位源頭節點，並產生事件報告。</p>
+        </div>
       </div>
-      <div class="rounded-2xl border border-line-light bg-bg p-7 shadow-sm">
-        <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
-          <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
+
+      <!-- 右：動態拓樸圖 -->
+      <div class="relative flex items-center justify-center rounded-2xl border border-line-light bg-ink p-6 shadow-xl" style="min-height:380px">
+        <svg id="graph-svg" viewBox="0 0 340 300" class="w-full max-w-sm" xmlns="http://www.w3.org/2000/svg">
+          <!-- 邊線 -->
+          <g id="graph-edges" stroke-width="1.5" fill="none">
+            <!-- App → Svc A, Svc B -->
+            <line id="e-app-svca" x1="170" y1="38" x2="90" y2="95" stroke="#25303f"/>
+            <line id="e-app-svcb" x1="170" y1="38" x2="250" y2="95" stroke="#25303f"/>
+            <!-- Svc A → Srv1 -->
+            <line id="e-svca-srv1" x1="90" y1="110" x2="70" y2="168" stroke="#25303f"/>
+            <!-- Svc B → Srv2 -->
+            <line id="e-svcb-srv2" x1="250" y1="110" x2="270" y2="168" stroke="#25303f"/>
+            <!-- Srv1 → Switch -->
+            <line id="e-srv1-sw" x1="70" y1="183" x2="140" y2="228" stroke="#25303f"/>
+            <!-- Srv2 → Switch -->
+            <line id="e-srv2-sw" x1="270" y1="183" x2="200" y2="228" stroke="#25303f"/>
+            <!-- Switch → PDU -->
+            <line id="e-sw-pdu" x1="170" y1="243" x2="170" y2="273" stroke="#25303f"/>
+          </g>
+
+          <!-- 節點 -->
+          <!-- App 服務 (頂部) -->
+          <g id="n-app" class="graph-node">
+            <circle cx="170" cy="28" r="20" fill="#162e2b" stroke="#25303f" stroke-width="1.5"/>
+            <text x="170" y="32" text-anchor="middle" font-size="9" fill="#7fb5b2" font-family="monospace">APP</text>
+          </g>
+          <!-- Service A -->
+          <g id="n-svca" class="graph-node">
+            <circle cx="90" cy="102" r="18" fill="#162e2b" stroke="#25303f" stroke-width="1.5"/>
+            <text x="90" y="106" text-anchor="middle" font-size="8" fill="#7fb5b2" font-family="monospace">SVC-A</text>
+          </g>
+          <!-- Service B -->
+          <g id="n-svcb" class="graph-node">
+            <circle cx="250" cy="102" r="18" fill="#162e2b" stroke="#25303f" stroke-width="1.5"/>
+            <text x="250" y="106" text-anchor="middle" font-size="8" fill="#7fb5b2" font-family="monospace">SVC-B</text>
+          </g>
+          <!-- Server 1 -->
+          <g id="n-srv1" class="graph-node">
+            <rect x="45" y="168" width="50" height="30" rx="5" fill="#162e2b" stroke="#25303f" stroke-width="1.5"/>
+            <text x="70" y="187" text-anchor="middle" font-size="8" fill="#7fb5b2" font-family="monospace">SRV-1</text>
+          </g>
+          <!-- Server 2 -->
+          <g id="n-srv2" class="graph-node">
+            <rect x="245" y="168" width="50" height="30" rx="5" fill="#162e2b" stroke="#25303f" stroke-width="1.5"/>
+            <text x="270" y="187" text-anchor="middle" font-size="8" fill="#7fb5b2" font-family="monospace">SRV-2</text>
+          </g>
+          <!-- Switch -->
+          <g id="n-sw" class="graph-node">
+            <rect x="143" y="228" width="54" height="28" rx="5" fill="#162e2b" stroke="#25303f" stroke-width="1.5"/>
+            <text x="170" y="246" text-anchor="middle" font-size="8" fill="#7fb5b2" font-family="monospace">SW</text>
+          </g>
+          <!-- PDU -->
+          <g id="n-pdu" class="graph-node">
+            <rect x="148" y="273" width="44" height="22" rx="4" fill="#162e2b" stroke="#25303f" stroke-width="1.5"/>
+            <text x="170" y="288" text-anchor="middle" font-size="8" fill="#7fb5b2" font-family="monospace">PDU</text>
+          </g>
+
+          <!-- 動畫狀態：mode-0 衝擊分析 — Server1 告警 → 向上擴散 -->
+          <g id="anim-impact" opacity="1">
+            <!-- alert ring on SRV-1 -->
+            <circle cx="70" cy="183" r="28" fill="none" stroke="#f87171" stroke-width="1" opacity="0">
+              <animate attributeName="r" values="26;38;26" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="70" cy="183" r="8" fill="#f87171" opacity="0">
+              <animate attributeName="opacity" values="1;0.4;1" dur="1.2s" repeatCount="indefinite"/>
+            </circle>
+            <!-- cascade line srv1→svca -->
+            <line x1="70" y1="183" x2="90" y2="110" stroke="#f87171" stroke-width="2.5" stroke-dasharray="6 3" opacity="0">
+              <animate attributeName="stroke-dashoffset" values="0;-18" dur="0.8s" repeatCount="indefinite"/>
+            </line>
+            <!-- cascade line svca→app -->
+            <line x1="90" y1="110" x2="170" y2="38" stroke="#f87171" stroke-width="2" stroke-dasharray="6 3" opacity="0">
+              <animate attributeName="stroke-dashoffset" values="0;-18" dur="0.8s" repeatCount="indefinite"/>
+            </line>
+            <!-- affected nodes -->
+            <circle cx="90" cy="102" r="22" fill="none" stroke="#f87171" stroke-width="2" opacity="0"/>
+            <circle cx="170" cy="28" r="24" fill="none" stroke="#fb923c" stroke-width="2" opacity="0"/>
+          </g>
+
+          <!-- 動畫狀態：mode-1 關聯分析 — 橫向關聯高亮 -->
+          <g id="anim-correlation" opacity="0">
+            <line x1="90" y1="102" x2="250" y2="102" stroke="#1aafa8" stroke-width="2" stroke-dasharray="5 3">
+              <animate attributeName="stroke-dashoffset" values="0;-16" dur="1s" repeatCount="indefinite"/>
+            </line>
+            <line x1="70" y1="183" x2="270" y2="183" stroke="#1aafa8" stroke-width="2" stroke-dasharray="5 3">
+              <animate attributeName="stroke-dashoffset" values="0;-16" dur="1s" repeatCount="indefinite"/>
+            </line>
+            <circle cx="90" cy="102" r="22" fill="none" stroke="#1aafa8" stroke-width="2">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="250" cy="102" r="22" fill="none" stroke="#1aafa8" stroke-width="2">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <!-- 動畫狀態：mode-2 根因分析 — 從告警往下追 -->
+          <g id="anim-rootcause" opacity="0">
+            <circle cx="170" cy="28" r="24" fill="none" stroke="#fb923c" stroke-width="2">
+              <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+            </circle>
+            <line x1="170" y1="38" x2="90" y2="95" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="6 3">
+              <animate attributeName="stroke-dashoffset" values="-18;0" dur="0.7s" repeatCount="indefinite"/>
+            </line>
+            <line x1="90" y1="110" x2="70" y2="168" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="6 3">
+              <animate attributeName="stroke-dashoffset" values="-18;0" dur="0.7s" begin="0.2s" repeatCount="indefinite"/>
+            </line>
+            <!-- root cause glow -->
+            <circle cx="70" cy="183" r="30" fill="#f87171" opacity="0">
+              <animate attributeName="opacity" values="0;0.15;0" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="70" cy="183" r="10" fill="#f87171" opacity="0">
+              <animate attributeName="opacity" values="0;0.9;0" dur="1.2s" begin="0.4s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+
+          <!-- 模式標籤 -->
+          <text id="graph-label" x="170" y="292" text-anchor="middle" font-size="9" fill="#1aafa8" font-family="monospace" letter-spacing="1">IMPACT ANALYSIS</text>
+        </svg>
+
+        <!-- 模式指示點 -->
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+          <button class="graph-dot h-2 w-6 rounded-full bg-brand transition-all" data-mode="0"></button>
+          <button class="graph-dot h-2 w-2 rounded-full bg-line opacity-50 transition-all" data-mode="1"></button>
+          <button class="graph-dot h-2 w-2 rounded-full bg-line opacity-50 transition-all" data-mode="2"></button>
         </div>
-        <h3 class="text-lg font-semibold text-tx">關聯分析</h3>
-        <p class="mt-1 text-sm font-medium text-brand">Correlation Analysis</p>
-        <p class="mt-3 leading-relaxed text-tx-muted">服務 / 資產 / 機架 / 電力路徑的相依關係，為備援規劃與維護策略提供依據。</p>
-      </div>
-      <div class="rounded-2xl border border-line-light bg-bg p-7 shadow-sm">
-        <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
-          <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
-        <h3 class="text-lg font-semibold text-tx">根因分析</h3>
-        <p class="mt-1 text-sm font-medium text-brand">Root Cause Analysis</p>
-        <p class="mt-3 leading-relaxed text-tx-muted">從告警反向追蹤事件鏈，自動定位源頭節點，並產生事件報告。</p>
       </div>
     </div>
   </section>
+
+  <script>
+    const MODES = [
+      { label: 'IMPACT ANALYSIS',      card: 0 },
+      { label: 'CORRELATION ANALYSIS', card: 1 },
+      { label: 'ROOT CAUSE ANALYSIS',  card: 2 },
+    ];
+    const anims   = ['anim-impact','anim-correlation','anim-rootcause'];
+    const cards   = document.querySelectorAll('.graph-mode-card');
+    const dots    = document.querySelectorAll('.graph-dot');
+    const labelEl = document.getElementById('graph-label');
+    let current = 0;
+
+    function setMode(idx) {
+      current = idx;
+      // 動畫圖層
+      anims.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (el) el.setAttribute('opacity', i === idx ? '1' : '0');
+      });
+      // 左側卡片高亮
+      cards.forEach((c, i) => {
+        if (i === idx) {
+          c.classList.add('border-brand','bg-brand/5');
+          c.classList.remove('border-line-light','bg-bg');
+          c.querySelector('.rounded-full')?.classList.replace('bg-bg-3','bg-brand');
+          c.querySelector('.rounded-full')?.classList.replace('text-tx-muted','text-white');
+          c.querySelector('p.text-sm.font-medium')?.classList.replace('text-tx-muted','text-brand');
+        } else {
+          c.classList.remove('border-brand','bg-brand/5');
+          c.classList.add('border-line-light','bg-bg');
+          c.querySelector('.rounded-full')?.classList.replace('bg-brand','bg-bg-3');
+          c.querySelector('.rounded-full')?.classList.replace('text-white','text-tx-muted');
+          c.querySelector('p.text-sm.font-medium')?.classList.replace('text-brand','text-tx-muted');
+        }
+      });
+      // 指示點
+      dots.forEach((d, i) => {
+        d.classList.toggle('w-6', i === idx);
+        d.classList.toggle('w-2', i !== idx);
+        d.classList.toggle('bg-brand', i === idx);
+        d.classList.toggle('bg-line', i !== idx);
+        d.classList.toggle('opacity-50', i !== idx);
+      });
+      // 標籤
+      if (labelEl) labelEl.textContent = MODES[idx].label;
+    }
+
+    // 自動循環
+    let timer = setInterval(() => setMode((current + 1) % 3), 3000);
+
+    // 點擊切換
+    dots.forEach(d => d.addEventListener('click', () => {
+      clearInterval(timer);
+      setMode(parseInt(d.dataset.mode));
+      timer = setInterval(() => setMode((current + 1) % 3), 3000);
+    }));
+    cards.forEach(c => c.addEventListener('click', () => {
+      clearInterval(timer);
+      setMode(parseInt(c.dataset.mode));
+      timer = setInterval(() => setMode((current + 1) % 3), 3000);
+    }));
+  </script>
 
   <!-- 8 大協定 -->
   <section class="mx-auto max-w-6xl px-6">
