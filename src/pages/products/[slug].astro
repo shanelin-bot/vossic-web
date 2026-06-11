@@ -17,79 +17,181 @@ const tr = t('zh');
 
 <Base title={`${data.name} │ 沃司科技 Vossic`} description={data.summary} lang="zh">
 
-  <!-- HERO -->
+  <!-- ① HERO -->
   <section class="relative overflow-hidden bg-ink text-tx-invert">
-    <div class="blueprint-grid pointer-events-none absolute inset-0 opacity-50"></div>
-    <div class="relative mx-auto max-w-4xl px-6 py-20 md:py-28">
-      <a href="/#products" class="readout text-tx-invert-muted hover:text-brand">← {tr('nav.products')}</a>
-      <h1 class="mt-6 font-mono text-5xl font-semibold tracking-tight md:text-6xl">{data.name}</h1>
-      <p class="mt-5 max-w-2xl text-xl text-brand">{data.tagline}</p>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-tx-invert-muted">{data.summary}</p>
+    <div class="blueprint-grid pointer-events-none absolute inset-0 opacity-40"></div>
+    <div class="pointer-events-none absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-brand/8 blur-3xl"></div>
+    <div class="relative mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <a href="/#products" class="readout inline-flex items-center gap-1.5 text-tx-invert-muted hover:text-brand transition-colors">
+        ← {tr('nav.products')}
+      </a>
+      <div class="mt-8 grid items-center gap-10 md:grid-cols-2">
+        <div>
+          <p class="readout text-brand">PRODUCT</p>
+          <h1 class="mt-3 font-mono text-6xl font-semibold tracking-tight md:text-7xl">{data.name}</h1>
+          <p class="mt-5 text-2xl leading-snug text-brand md:text-3xl">{data.tagline}</p>
+          <p class="mt-5 text-lg leading-relaxed text-tx-invert-muted">{data.summary}</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="mailto:sales@vossic.com.tw"
+              class="rounded-lg bg-brand px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-2">
+              {tr('product.cta')}
+            </a>
+            <a href="/#contact"
+              class="rounded-lg border border-line-dark px-6 py-3 font-semibold text-tx-invert transition-colors hover:border-brand hover:text-brand">
+              {tr('hero.cta2')}
+            </a>
+          </div>
+        </div>
+        <!-- Pain point preview on hero -->
+        {data.painPoints.length > 0 && (
+        <div class="hidden md:block">
+          <p class="readout mb-4 text-tx-invert-muted">CHALLENGES WE SOLVE</p>
+          <div class="space-y-3">
+            {data.painPoints.slice(0,3).map((pt, i) => (
+              <div class="flex items-start gap-3 rounded-lg border border-line-dark bg-ink-2/60 px-4 py-3">
+                <span class="readout mt-0.5 shrink-0 text-alert">{String(i+1).padStart(2,'0')}</span>
+                <p class="text-sm leading-relaxed text-tx-invert-muted">{pt}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        )}
+      </div>
     </div>
   </section>
 
-  <!-- SCREENSHOT -->
+  <!-- ② SCREENSHOT -->
   {data.screenshot && (
-  <div class="border-b border-line-light bg-bg-2">
-    <div class="mx-auto max-w-5xl px-6 py-12 md:py-16">
-      <p class="readout mb-5 text-brand-2">SYSTEM // 系統畫面</p>
-      <div class="overflow-hidden rounded-2xl border border-line-light shadow-lg">
-        <img
-          src={data.screenshot}
-          alt={`${data.name} 系統畫面`}
-          class="w-full object-cover"
-        />
+  <section class="bg-bg-2">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <p class="readout mb-6 text-brand-2">SYSTEM // 系統實際畫面</p>
+      <!-- 瀏覽器框架效果 -->
+      <div class="overflow-hidden rounded-2xl border border-line-light shadow-2xl">
+        <div class="flex items-center gap-1.5 border-b border-line-light bg-bg-3 px-4 py-3">
+          <span class="h-3 w-3 rounded-full bg-red-400"></span>
+          <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+          <span class="h-3 w-3 rounded-full bg-green-400"></span>
+          <div class="ml-3 flex-1 rounded bg-bg px-3 py-1 text-xs text-tx-muted font-mono">
+            {data.name.toLowerCase()}.vossic.com
+          </div>
+        </div>
+        <img src={data.screenshot} alt={`${data.name} 系統畫面`} class="w-full object-cover" />
       </div>
     </div>
-  </div>
+  </section>
   )}
 
-  <article class="mx-auto max-w-4xl px-6 py-20 md:py-24">
-
-    {data.painPoints.length > 0 && (
-      <section class="reveal">
-        <p class="readout text-brand-2">{tr('product.pain')}</p>
-        <ul class="mt-6 grid gap-4">
-          {data.painPoints.map((pt) => (
-            <li class="flex gap-4 rounded-lg border-l-4 border-alert bg-bg-3 py-4 pl-5 pr-4 text-base text-tx">{pt}</li>
-          ))}
-        </ul>
-      </section>
-    )}
-
-    {data.features.length > 0 && (
-      <section class="reveal mt-20">
-        <p class="readout text-brand-2">{tr('product.features')}</p>
-        <div class="mt-6 grid gap-px overflow-hidden rounded-xl border border-line-light bg-line-light sm:grid-cols-2">
-          {data.features.map((f) => (
-            <div class="bg-bg p-7">
-              <h3 class="text-lg font-semibold text-tx">{f.title}</h3>
-              <p class="mt-2 leading-relaxed text-tx-muted">{f.desc}</p>
+  <!-- ③ THE CHALLENGE (Pain Points) -->
+  {data.painPoints.length > 0 && (
+  <section class="bg-bg">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="readout text-alert">THE CHALLENGE</p>
+        <h2 class="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">你現在面對的問題</h2>
+      </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-2">
+        {data.painPoints.map((pt, i) => (
+          <div class="reveal flex gap-5 rounded-2xl border border-line-light bg-bg p-7 shadow-sm" style={`transition-delay:${i*80}ms`}>
+            <div class="shrink-0">
+              <span class="flex h-10 w-10 items-center justify-center rounded-full bg-alert/10 font-mono text-sm font-bold text-alert">
+                {String(i+1).padStart(2,'0')}
+              </span>
             </div>
-          ))}
-        </div>
-      </section>
-    )}
-
-    {data.useCases.length > 0 && (
-      <section class="reveal mt-20">
-        <p class="readout text-brand-2">{tr('product.usecases')}</p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          {data.useCases.map((u) => (
-            <span class="rounded-lg border border-line-light bg-brand-bg px-5 py-2.5 text-base text-tx-2">{u}</span>
-          ))}
-        </div>
-      </section>
-    )}
-
-    <div class="reveal prose prose-lg mt-20 max-w-none leading-relaxed text-tx">
-      <Content />
+            <p class="text-lg leading-relaxed text-tx">{pt}</p>
+          </div>
+        ))}
+      </div>
     </div>
+  </section>
+  )}
 
-    <div class="mt-20 flex flex-wrap gap-4 border-t border-line-light pt-12">
-      <a href="mailto:sales@vossic.com" class="rounded-lg bg-brand px-7 py-3.5 font-semibold text-white hover:bg-brand-2">{tr('product.cta')}</a>
-      <a href="/#contact" class="rounded-lg border border-line-light px-7 py-3.5 font-semibold text-tx hover:border-brand hover:text-brand">{tr('hero.cta2')}</a>
+  <!-- ④ CAPABILITIES (Features) -->
+  {data.features.length > 0 && (
+  <section class="bg-bg-2">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="readout text-brand-2">CAPABILITIES</p>
+        <h2 class="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">核心功能</h2>
+      </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {data.features.map((f, i) => (
+          <div class="reveal flex flex-col rounded-2xl border border-line-light bg-bg p-7 shadow-sm transition-shadow hover:shadow-md" style={`transition-delay:${i*80}ms`}>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand/10">
+                <span class="font-mono text-sm font-bold text-brand">{String(i+1).padStart(2,'0')}</span>
+              </div>
+              <h3 class="text-lg font-semibold text-tx">{f.title}</h3>
+            </div>
+            <p class="flex-1 leading-relaxed text-tx-muted">{f.desc}</p>
+          </div>
+        ))}
+      </div>
     </div>
-  </article>
+  </section>
+  )}
+
+  <!-- ⑤ USE CASES -->
+  {data.useCases.length > 0 && (
+  <section class="bg-bg">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="readout text-brand-2">USE CASES</p>
+        <h2 class="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">適用情境</h2>
+      </div>
+      <div class="mt-12 flex flex-wrap justify-center gap-4">
+        {data.useCases.map((u, i) => (
+          <div class="reveal flex items-center gap-2.5 rounded-xl border border-line-light bg-bg-2 px-5 py-3 shadow-sm" style={`transition-delay:${i*50}ms`}>
+            <span class="h-2 w-2 rounded-full bg-brand"></span>
+            <span class="text-base text-tx">{u}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  )}
+
+  <!-- ⑥ DEEP DIVE (MDX Body) -->
+  {(await render(product)).Content && (
+  <section class="border-t border-line-light bg-bg-2">
+    <div class="mx-auto max-w-4xl px-6 py-20 md:py-28">
+      <div class="prose prose-lg max-w-none
+        prose-headings:font-semibold prose-headings:text-tx prose-headings:tracking-tight
+        prose-h2:mt-16 prose-h2:text-3xl prose-h2:border-b prose-h2:border-line-light prose-h2:pb-4
+        prose-h3:text-xl prose-h3:text-tx-2
+        prose-p:leading-relaxed prose-p:text-tx-muted
+        prose-li:text-tx-muted prose-li:leading-relaxed
+        prose-strong:text-tx prose-strong:font-semibold
+        prose-table:text-sm
+        prose-th:bg-bg-2 prose-th:text-tx prose-th:font-semibold
+        prose-td:text-tx-muted
+        prose-a:text-brand prose-a:no-underline hover:prose-a:underline
+        [&_hr]:border-line-light">
+        <Content />
+      </div>
+    </div>
+  </section>
+  )}
+
+  <!-- ⑦ CTA STRIP -->
+  <section class="bg-ink text-tx-invert">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <div class="flex flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
+        <div>
+          <h2 class="text-2xl font-semibold md:text-3xl">準備好了解 {data.name} 嗎？</h2>
+          <p class="mt-2 text-tx-invert-muted">告訴我們你的場域，我們安排一場針對需求的展示。</p>
+        </div>
+        <div class="flex shrink-0 flex-wrap gap-3">
+          <a href="mailto:sales@vossic.com.tw"
+            class="rounded-lg bg-brand px-7 py-3.5 font-semibold text-white transition-colors hover:bg-brand-2">
+            {tr('product.cta')}
+          </a>
+          <a href="/#contact"
+            class="rounded-lg border border-line-dark px-7 py-3.5 font-semibold text-tx-invert transition-colors hover:border-brand hover:text-brand">
+            {tr('hero.cta2')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </Base>
