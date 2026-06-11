@@ -17,32 +17,32 @@
     <div class="grid items-center gap-10 md:grid-cols-2">
       <!-- 左：三種模式說明，會跟著動畫高亮 -->
       <div class="space-y-4" id="graph-modes">
-        <div class="graph-mode-card active rounded-2xl border-2 border-brand bg-brand/5 p-6 transition-all duration-500" data-mode="0">
+        <div class="graph-mode-card rounded-2xl border-2 p-6 transition-all duration-300 cursor-pointer" data-mode="0">
           <div class="flex items-center gap-3">
-            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">01</span>
+            <span class="mode-badge flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold">01</span>
             <div>
               <h3 class="font-semibold text-tx">衝擊分析</h3>
-              <p class="text-sm font-medium text-brand">Impact Analysis</p>
+              <p class="mode-sub text-sm font-medium">Impact Analysis</p>
             </div>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-tx-muted">一台設備下線，哪些業務服務會受影響？數秒內追蹤下游依賴，計算影響範圍。</p>
         </div>
-        <div class="graph-mode-card rounded-2xl border-2 border-line-light bg-bg p-6 transition-all duration-500" data-mode="1">
+        <div class="graph-mode-card rounded-2xl border-2 p-6 transition-all duration-300 cursor-pointer" data-mode="1">
           <div class="flex items-center gap-3">
-            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-bg-3 text-xs font-bold text-tx-muted">02</span>
+            <span class="mode-badge flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold">02</span>
             <div>
               <h3 class="font-semibold text-tx">關聯分析</h3>
-              <p class="text-sm font-medium text-tx-muted">Correlation Analysis</p>
+              <p class="mode-sub text-sm font-medium">Correlation Analysis</p>
             </div>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-tx-muted">服務 / 資產 / 機架 / 電力路徑的相依關係，為備援規劃與維護策略提供依據。</p>
         </div>
-        <div class="graph-mode-card rounded-2xl border-2 border-line-light bg-bg p-6 transition-all duration-500" data-mode="2">
+        <div class="graph-mode-card rounded-2xl border-2 p-6 transition-all duration-300 cursor-pointer" data-mode="2">
           <div class="flex items-center gap-3">
-            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-bg-3 text-xs font-bold text-tx-muted">03</span>
+            <span class="mode-badge flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold">03</span>
             <div>
               <h3 class="font-semibold text-tx">根因分析</h3>
-              <p class="text-sm font-medium text-tx-muted">Root Cause Analysis</p>
+              <p class="mode-sub text-sm font-medium">Root Cause Analysis</p>
             </div>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-tx-muted">從告警反向追蹤事件鏈，自動定位源頭節點，並產生事件報告。</p>
@@ -117,16 +117,20 @@
               <animate attributeName="opacity" values="1;0.4;1" dur="1.2s" repeatCount="indefinite"/>
             </circle>
             <!-- cascade line srv1→svca -->
-            <line x1="70" y1="183" x2="90" y2="110" stroke="#f87171" stroke-width="2.5" stroke-dasharray="6 3" opacity="0">
+            <line x1="70" y1="183" x2="90" y2="110" stroke="#f87171" stroke-width="2.5" stroke-dasharray="6 3">
               <animate attributeName="stroke-dashoffset" values="0;-18" dur="0.8s" repeatCount="indefinite"/>
             </line>
             <!-- cascade line svca→app -->
-            <line x1="90" y1="110" x2="170" y2="38" stroke="#f87171" stroke-width="2" stroke-dasharray="6 3" opacity="0">
+            <line x1="90" y1="110" x2="170" y2="38" stroke="#f87171" stroke-width="2" stroke-dasharray="6 3">
               <animate attributeName="stroke-dashoffset" values="0;-18" dur="0.8s" repeatCount="indefinite"/>
             </line>
             <!-- affected nodes -->
-            <circle cx="90" cy="102" r="22" fill="none" stroke="#f87171" stroke-width="2" opacity="0"/>
-            <circle cx="170" cy="28" r="24" fill="none" stroke="#fb923c" stroke-width="2" opacity="0"/>
+            <circle cx="90" cy="102" r="22" fill="none" stroke="#f87171" stroke-width="2">
+              <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="170" cy="28" r="24" fill="none" stroke="#fb923c" stroke-width="2">
+              <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.8s" repeatCount="indefinite"/>
+            </circle>
           </g>
 
           <!-- 動畫狀態：mode-1 關聯分析 — 橫向關聯高亮 -->
@@ -180,66 +184,49 @@
   </section>
 
   <script>
-    const MODES = [
-      { label: 'IMPACT ANALYSIS',      card: 0 },
-      { label: 'CORRELATION ANALYSIS', card: 1 },
-      { label: 'ROOT CAUSE ANALYSIS',  card: 2 },
-    ];
-    const anims   = ['anim-impact','anim-correlation','anim-rootcause'];
-    const cards   = document.querySelectorAll('.graph-mode-card');
-    const dots    = document.querySelectorAll('.graph-dot');
-    const labelEl = document.getElementById('graph-label');
-    let current = 0;
+    (function() {
+      const LABELS = ['IMPACT ANALYSIS', 'CORRELATION ANALYSIS', 'ROOT CAUSE ANALYSIS'];
+      const ANIMS  = ['anim-impact', 'anim-correlation', 'anim-rootcause'];
+      const cards  = Array.from(document.querySelectorAll('.graph-mode-card'));
+      const dots   = Array.from(document.querySelectorAll('.graph-dot'));
+      const label  = document.getElementById('graph-label');
+      let cur = 0;
 
-    function setMode(idx) {
-      current = idx;
-      // 動畫圖層
-      anims.forEach((id, i) => {
-        const el = document.getElementById(id);
-        if (el) el.setAttribute('opacity', i === idx ? '1' : '0');
-      });
-      // 左側卡片高亮
-      cards.forEach((c, i) => {
-        if (i === idx) {
-          c.classList.add('border-brand','bg-brand/5');
-          c.classList.remove('border-line-light','bg-bg');
-          c.querySelector('.rounded-full')?.classList.replace('bg-bg-3','bg-brand');
-          c.querySelector('.rounded-full')?.classList.replace('text-tx-muted','text-white');
-          c.querySelector('p.text-sm.font-medium')?.classList.replace('text-tx-muted','text-brand');
-        } else {
-          c.classList.remove('border-brand','bg-brand/5');
-          c.classList.add('border-line-light','bg-bg');
-          c.querySelector('.rounded-full')?.classList.replace('bg-brand','bg-bg-3');
-          c.querySelector('.rounded-full')?.classList.replace('text-white','text-tx-muted');
-          c.querySelector('p.text-sm.font-medium')?.classList.replace('text-brand','text-tx-muted');
+      function applyCard(c, isActive) {
+        c.style.borderColor = isActive ? 'var(--color-brand)' : 'var(--color-line-light)';
+        c.style.background  = isActive ? 'color-mix(in srgb, var(--color-brand) 6%, white)' : 'var(--color-bg)';
+        const badge = c.querySelector('.mode-badge');
+        if (badge) {
+          badge.style.background = isActive ? 'var(--color-brand)' : 'var(--color-bg-3)';
+          badge.style.color      = isActive ? '#fff' : 'var(--color-tx-muted)';
         }
-      });
-      // 指示點
-      dots.forEach((d, i) => {
-        d.classList.toggle('w-6', i === idx);
-        d.classList.toggle('w-2', i !== idx);
-        d.classList.toggle('bg-brand', i === idx);
-        d.classList.toggle('bg-line', i !== idx);
-        d.classList.toggle('opacity-50', i !== idx);
-      });
-      // 標籤
-      if (labelEl) labelEl.textContent = MODES[idx].label;
-    }
+        const sub = c.querySelector('.mode-sub');
+        if (sub) sub.style.color = isActive ? 'var(--color-brand)' : 'var(--color-tx-muted)';
+      }
 
-    // 自動循環
-    let timer = setInterval(() => setMode((current + 1) % 3), 3000);
+      function setMode(idx) {
+        cur = idx;
+        ANIMS.forEach((id, i) => {
+          const el = document.getElementById(id);
+          if (el) el.setAttribute('opacity', i === idx ? '1' : '0');
+        });
+        cards.forEach((c, i) => applyCard(c, i === idx));
+        dots.forEach((d, i) => {
+          d.style.width      = i === idx ? '24px' : '8px';
+          d.style.opacity    = i === idx ? '1' : '0.4';
+          d.style.background = i === idx ? 'var(--color-brand)' : 'var(--color-line)';
+        });
+        if (label) label.textContent = LABELS[idx];
+      }
 
-    // 點擊切換
-    dots.forEach(d => d.addEventListener('click', () => {
-      clearInterval(timer);
-      setMode(parseInt(d.dataset.mode));
-      timer = setInterval(() => setMode((current + 1) % 3), 3000);
-    }));
-    cards.forEach(c => c.addEventListener('click', () => {
-      clearInterval(timer);
-      setMode(parseInt(c.dataset.mode));
-      timer = setInterval(() => setMode((current + 1) % 3), 3000);
-    }));
+      // 初始化
+      setMode(0);
+
+      let timer = setInterval(() => setMode((cur + 1) % 3), 3000);
+      const reset = (idx) => { clearInterval(timer); setMode(idx); timer = setInterval(() => setMode((cur + 1) % 3), 3000); };
+      dots.forEach(d  => d.addEventListener('click', () => reset(+d.dataset.mode)));
+      cards.forEach(c => c.addEventListener('click', () => reset(+c.dataset.mode)));
+    })();
   </script>
 
   <!-- 8 大協定 -->
