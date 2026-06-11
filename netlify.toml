@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "dist/client"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Keystatic 後台路由（本機 dev 用，Netlify 不需要處理）
+[[redirects]]
+  from = "/keystatic/*"
+  to = "/keystatic/:splat"
+  status = 200
