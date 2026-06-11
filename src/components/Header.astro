@@ -1,0 +1,30 @@
+---
+import { t, type Lang } from '../i18n/ui';
+const { lang = 'zh' } = Astro.props as { lang?: Lang };
+const tr = t(lang);
+const base = lang === 'zh' ? '' : '/en';
+const nav = [
+  { href: `${base}/#products`, label: tr('nav.products') },
+  { href: `${base}/#about`, label: tr('nav.about') },
+  { href: `${base}/#news`, label: tr('nav.news') },
+  { href: `${base}/#partners`, label: tr('nav.partners') },
+  { href: `${base}/joinus`, label: tr('nav.joinus') },
+  { href: `${base}/#contact`, label: tr('nav.contact') },
+];
+const altLang = lang === 'zh' ? { href: '/en/', label: 'EN' } : { href: '/', label: '中' };
+---
+
+<header class="sticky top-0 z-50 border-b border-line-light bg-white/95 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+    <a href={`${base}/`} class="flex items-center">
+      <img src="/images/logo_c.png" alt="Vossic Technology" class="h-14 w-auto" />
+    </a>
+    <nav class="hidden items-center gap-8 md:flex">
+      {nav.map((n) => (
+        <a href={n.href} class="text-base text-tx-2 transition-colors hover:text-brand">{n.label}</a>
+      ))}
+      <a href={altLang.href} class="readout rounded border border-line px-3 py-1.5 text-tx-muted transition-colors hover:border-brand hover:text-brand">{altLang.label}</a>
+    </nav>
+    <a href={altLang.href} class="readout rounded border border-line px-3 py-1.5 text-tx-muted md:hidden">{altLang.label}</a>
+  </div>
+</header>

@@ -1,0 +1,149 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n/ui';
+
+const tr = t('en');
+
+const values = [
+  { title: 'Work-life balance', desc: 'Flexible hours and remote-work options so work fits your life.' },
+  { title: 'Genuine passion', desc: 'We love technology and industry — we work on things we care about.' },
+  { title: 'Excellence', desc: 'High standards for quality and craft; always pushing products further.' },
+  { title: 'Courageous learning', desc: 'Embrace new tech and new domains; cross-discipline experiments are welcome.' },
+  { title: 'Team success', desc: 'Individual wins are built on mutual support and shared challenges.' },
+  { title: 'Outcome sharing', desc: 'The fruits of company growth are shared by every contributor.' },
+  { title: 'Creative co-creation', desc: 'Anyone can pitch an idea — the best ones have no rank.' },
+  { title: 'Effective communication', desc: 'Direct, candid, and productive — spend time solving problems.' },
+];
+
+const benefits = [
+  {
+    category: 'Compensation',
+    items: ['Competitive market salary', 'R&D project bonuses', 'Internal venture bonuses', 'Year-end bonus'],
+  },
+  {
+    category: 'Insurance',
+    items: ['Group health & accident insurance', 'Business travel accident insurance', 'Statutory labor & health insurance', 'Retirement fund contributions'],
+  },
+  {
+    category: 'Subsidies',
+    items: ['Marriage subsidy', 'Childbirth subsidy', 'Employee travel allowance'],
+  },
+  {
+    category: 'Growth & Environment',
+    items: ['Premium health checkup (every 2 years)', 'Domestic & international training', 'Monthly team gatherings', 'Quarterly outdoor activities', 'Flexible remote work', 'Humanistic management culture'],
+  },
+];
+---
+
+<Base title="Join Us │ Vossic Technology" description="Join Vossic — a dynamic AIoT startup transforming smart buildings and data centers." lang="en">
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-ink text-tx-invert">
+    <div class="blueprint-grid pointer-events-none absolute inset-0 opacity-60"></div>
+    <div class="relative mx-auto max-w-6xl px-5 py-24 md:py-32">
+      <p class="readout flex items-center gap-2 text-signal">
+        <span class="status-dot"></span>{tr('nav.joinus')}
+      </p>
+      <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+        Ready to make your mark in the new era of industry?
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-tx-invert-muted">
+        We're a vibrant startup with deep technical and industry experience. If you're passionate about innovation and want to transform the way the world manages buildings and data centers — come join us.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a
+          href="https://www.104.com.tw/company/1a2x6bkpau"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-md bg-signal px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-signal-2"
+        >
+          View open positions (104 Jobs)
+        </a>
+        <a
+          href="mailto:hr@vossic.com"
+          class="rounded-md border border-line px-6 py-3 text-sm font-semibold text-tx-invert transition-colors hover:border-signal"
+        >
+          Send your résumé
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+    <p class="readout text-signal-2">CULTURE // VALUES</p>
+    <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">What we care about</h2>
+    <div class="mt-12 grid gap-px overflow-hidden rounded-md border border-line-light bg-line-light sm:grid-cols-2 md:grid-cols-4">
+      {values.map((v, i) => (
+        <div class="reveal flex flex-col bg-paper-2 p-6" style={`transition-delay:${i * 50}ms`}>
+          <span class="readout text-tx-muted">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="mt-3 font-semibold text-ink">{v.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-tx-muted">{v.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="border-t border-line-light bg-paper">
+    <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+      <p class="readout text-signal-2">BENEFITS // PERKS</p>
+      <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">So you can focus on what matters</h2>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
+        {benefits.map((b, i) => (
+          <div class="reveal rounded-md border border-line-light bg-paper-2 p-6" style={`transition-delay:${i * 80}ms`}>
+            <p class="readout mb-4 text-signal-2">{b.category}</p>
+            <ul class="space-y-2">
+              {b.items.map((item) => (
+                <li class="flex items-start gap-2 text-sm leading-relaxed text-tx-muted">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-signal"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-line-light bg-ink text-tx-invert">
+    <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+      <div class="grid items-center gap-10 md:grid-cols-2">
+        <div>
+          <p class="readout text-signal">HIRING // OPEN ROLES</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Join Vossic</h2>
+          <p class="mt-5 max-w-md leading-relaxed text-tx-invert-muted">
+            Browse our latest openings on 104 Jobs, or send your résumé directly to our HR team and tell us why you want to join.
+          </p>
+        </div>
+        <div class="space-y-4 rounded-md border border-line bg-ink-2 p-7">
+          <div>
+            <p class="readout mb-1 text-tx-invert-muted">HR Email</p>
+            <a href="mailto:hr@vossic.com" class="font-mono text-signal hover:underline">hr@vossic.com</a>
+          </div>
+          <div>
+            <p class="readout mb-1 text-tx-invert-muted">Phone</p>
+            <p class="font-mono text-tx-invert">02-2269-7712</p>
+          </div>
+          <div>
+            <p class="readout mb-1 text-tx-invert-muted">Address</p>
+            <p class="text-sm text-tx-invert-muted">6F, No. 655 Bannan Rd., Zhonghe Dist., New Taipei City 235</p>
+          </div>
+          <div class="border-t border-line pt-4">
+            <a
+              href="https://www.104.com.tw/company/1a2x6bkpau"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-md bg-signal px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-signal-2"
+            >
+              View all open roles →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

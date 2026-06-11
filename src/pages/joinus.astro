@@ -1,0 +1,149 @@
+---
+import Base from '../layouts/Base.astro';
+import { t } from '../i18n/ui';
+
+const tr = t('zh');
+
+const values = [
+  { title: '生活工作平衡', desc: '彈性工時與居家辦公制度，讓工作融入生活節奏。' },
+  { title: '熱情投入', desc: '我們喜愛技術與產業，做自己真正在乎的事。' },
+  { title: '追求卓越', desc: '對品質與細節有高標準，不斷精進產品與服務。' },
+  { title: '勇於學習', desc: '擁抱新技術、新領域，鼓勵跨界嘗試與成長。' },
+  { title: '團隊成功', desc: '個人成就建立在彼此支持上，共同面對挑戰。' },
+  { title: '成果共享', desc: '公司成長的果實，由每一位貢獻者共同享有。' },
+  { title: '創意共創', desc: '每個人都可以提出想法，最好的點子沒有職級之分。' },
+  { title: '有效溝通', desc: '直接表達、充分討論，把時間花在解決問題上。' },
+];
+
+const benefits = [
+  {
+    category: '薪資獎金',
+    items: ['具市場競爭力之薪資', '研發專案獎金', '內部創業獎金', '年終獎金'],
+  },
+  {
+    category: '保險保障',
+    items: ['員工團體健康險與意外險', '商務旅行意外險', '法定勞健保', '勞退金提撥'],
+  },
+  {
+    category: '補助福利',
+    items: ['結婚補助', '生育補助', '員工旅遊補助'],
+  },
+  {
+    category: '成長與環境',
+    items: ['高階健康檢查（每兩年一次）', '國內外教育訓練補助', '月度員工聚會', '季度戶外活動', '彈性居家辦公', '人性化管理文化'],
+  },
+];
+---
+
+<Base title="加入我們 │ 沃司科技 Vossic" description="加入沃司科技，與充滿活力的 AIoT 新創團隊一起翻轉智慧大樓與資料中心產業。" lang="zh">
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-ink text-tx-invert">
+    <div class="blueprint-grid pointer-events-none absolute inset-0 opacity-60"></div>
+    <div class="relative mx-auto max-w-6xl px-5 py-24 md:py-32">
+      <p class="readout flex items-center gap-2 text-signal">
+        <span class="status-dot"></span>{tr('nav.joinus')}
+      </p>
+      <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
+        想在這風起雲湧的<br />產業新時代嶄露頭角嗎？
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-tx-invert-muted">
+        我們是一個充滿活力的新創團隊，成員具有豐富的技術實作與產業經驗。歡迎有著創新熱誠、期待翻轉自我視野及世界的你一起加入！
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <a
+          href="https://www.104.com.tw/company/1a2x6bkpau"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-md bg-signal px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-signal-2"
+        >
+          查看職缺（104 人力銀行）
+        </a>
+        <a
+          href="mailto:hr@vossic.com"
+          class="rounded-md border border-line px-6 py-3 text-sm font-semibold text-tx-invert transition-colors hover:border-signal"
+        >
+          寄送履歷
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+    <p class="readout text-signal-2">CULTURE // 團隊文化</p>
+    <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">我們重視什麼</h2>
+    <div class="mt-12 grid gap-px overflow-hidden rounded-md border border-line-light bg-line-light sm:grid-cols-2 md:grid-cols-4">
+      {values.map((v, i) => (
+        <div class="reveal flex flex-col bg-paper-2 p-6" style={`transition-delay:${i * 50}ms`}>
+          <span class="readout text-tx-muted">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="mt-3 font-semibold text-ink">{v.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-tx-muted">{v.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="border-t border-line-light bg-paper">
+    <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+      <p class="readout text-signal-2">BENEFITS // 員工福利</p>
+      <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">讓你安心做重要的事</h2>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
+        {benefits.map((b, i) => (
+          <div class="reveal rounded-md border border-line-light bg-paper-2 p-6" style={`transition-delay:${i * 80}ms`}>
+            <p class="readout mb-4 text-signal-2">{b.category}</p>
+            <ul class="space-y-2">
+              {b.items.map((item) => (
+                <li class="flex items-start gap-2 text-sm leading-relaxed text-tx-muted">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-signal"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-line-light bg-ink text-tx-invert">
+    <div class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+      <div class="grid items-center gap-10 md:grid-cols-2">
+        <div>
+          <p class="readout text-signal">HIRING // 職缺資訊</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">加入沃司科技</h2>
+          <p class="mt-5 max-w-md leading-relaxed text-tx-invert-muted">
+            歡迎至 104 人力銀行查看最新職缺，或直接寄送履歷至人資信箱，告訴我們你想加入的原因。
+          </p>
+        </div>
+        <div class="space-y-4 rounded-md border border-line bg-ink-2 p-7">
+          <div>
+            <p class="readout mb-1 text-tx-invert-muted">人資信箱</p>
+            <a href="mailto:hr@vossic.com" class="font-mono text-signal hover:underline">hr@vossic.com</a>
+          </div>
+          <div>
+            <p class="readout mb-1 text-tx-invert-muted">電話</p>
+            <p class="font-mono text-tx-invert">02-2269-7712</p>
+          </div>
+          <div>
+            <p class="readout mb-1 text-tx-invert-muted">地址</p>
+            <p class="text-sm text-tx-invert-muted">235 新北市中和區板南路 655 號 6 樓</p>
+          </div>
+          <div class="border-t border-line pt-4">
+            <a
+              href="https://www.104.com.tw/company/1a2x6bkpau"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-md bg-signal px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-signal-2"
+            >
+              查看所有職缺 →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

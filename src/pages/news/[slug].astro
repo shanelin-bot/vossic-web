@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n/ui';
+
+export async function getStaticPaths() {
+  const items = await getCollection('newsZh');
+  return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { data } = item;
+const { Content } = await render(item);
+const tr = t('zh');
+
+const dateStr = data.date.toLocaleDateString('zh-TW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base title={`${data.title} │ 沃司科技`} description={data.excerpt} lang="zh">
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-ink text-tx-invert">
+    <div class="blueprint-grid pointer-events-none absolute inset-0 opacity-50"></div>
+    <div class="relative mx-auto max-w-4xl px-5 py-20 md:py-24">
+      <a href="/#news" class="readout text-tx-invert-muted hover:text-signal">← {tr('nav.news')}</a>
+      <time class="readout mt-5 block text-signal" datetime={data.date.toISOString()}>{dateStr}</time>
+      <h1 class="mt-3 text-3xl font-semibold leading-snug tracking-tight md:text-4xl">{data.title}</h1>
+      {data.excerpt && (
+        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-tx-invert-muted">{data.excerpt}</p>
+      )}
+    </div>
+  </section>
+
+  <!-- ARTICLE BODY -->
+  <article class="mx-auto max-w-4xl px-5 py-16 md:py-20">
+    <div class="prose prose-lg max-w-none leading-relaxed text-tx
+      prose-headings:font-semibold prose-headings:text-ink
+      prose-a:text-signal prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-ink">
+      <Content />
+    </div>
+
+    <div class="mt-16 border-t border-line-light pt-10">
+      <a href="/#news" class="readout rounded-md border border-line-light px-5 py-2.5 text-tx hover:border-signal hover:text-signal">
+        ← {tr('nav.news')}
+      </a>
+    </div>
+  </article>
+
+</Base>

@@ -1,0 +1,32 @@
+---
+import { t, type Lang } from '../i18n/ui';
+const { lang = 'zh' } = Astro.props as { lang?: Lang };
+const tr = t(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line-dark bg-ink text-tx-invert-muted">
+  <div class="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-3">
+    <div>
+      <div class="inline-block rounded-lg bg-white px-3 py-2">
+        <img src="/images/logo_c.png" alt="Vossic Technology" class="h-8 w-auto" />
+      </div>
+      <p class="mt-4 text-base leading-relaxed">
+        沃司科技股份有限公司<br />Vossic Technology Co., Ltd.
+      </p>
+    </div>
+    <div class="text-base leading-relaxed">
+      <p class="readout mb-3 text-tx-invert">{tr('nav.contact')}</p>
+      <p>235 新北市中和區板南路 655 號 6 樓</p>
+      <p class="mt-1">02-2269-7712</p>
+      <a href="mailto:sales@vossic.com" class="mt-1 block hover:text-brand">sales@vossic.com</a>
+    </div>
+    <div class="text-base">
+      <p class="readout mb-3 text-tx-invert">Social</p>
+      <a href="https://www.facebook.com/vossic2018/" class="hover:text-brand">Facebook</a>
+    </div>
+  </div>
+  <div class="border-t border-line-dark py-5 text-center font-mono text-sm">
+    © {year} Vossic Technology Co., Ltd. — {tr('footer.rights')}
+  </div>
+</footer>

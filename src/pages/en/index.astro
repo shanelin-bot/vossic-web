@@ -1,0 +1,158 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n/ui';
+
+const tr = t('en');
+const products = (await getCollection('productsEn')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const news = (await getCollection('newsZh'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const serviceAreas = [
+  { img: '/images/gallery/gallery_05.jpg', label: tr('about.area.dc') },
+  { img: '/images/gallery/gallery_07.jpg', label: tr('about.area.mfg') },
+  { img: '/images/gallery/gallery_02.jpg', label: tr('about.area.cold') },
+  { img: '/images/gallery/gallery_06.jpg', label: tr('about.area.retail') },
+];
+
+const clientLogos = Array.from({ length: 10 }, (_, i) => ({
+  src: `/images/clients/client_${String(i + 1).padStart(2, '0')}.jpg`,
+  alt: `Partner ${i + 1}`,
+}));
+---
+
+<Base title="Vossic │ Integrated monitoring for buildings & data centers" lang="en">
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-ink text-tx-invert">
+    <div class="blueprint-grid pointer-events-none absolute inset-0 opacity-50"></div>
+    <div class="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand/10 blur-3xl"></div>
+    <div class="relative mx-auto max-w-6xl px-6 py-28 md:py-40">
+      <p class="readout flex items-center gap-2.5 text-brand">
+        <span class="status-dot"></span>{tr('hero.eyebrow')}
+      </p>
+      <h1 class="mt-6 max-w-3xl text-5xl font-semibold leading-tight tracking-tight md:text-7xl">{tr('hero.title')}</h1>
+      <p class="mt-7 max-w-2xl text-xl leading-relaxed text-tx-invert-muted">{tr('hero.sub')}</p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="#products" class="rounded-md bg-brand px-7 py-3.5 font-semibold text-white transition-colors hover:bg-brand-2">{tr('hero.cta')}</a>
+        <a href="#contact" class="rounded-md border border-line-dark px-7 py-3.5 font-semibold text-tx-invert transition-colors hover:border-brand hover:text-brand">{tr('hero.cta2')}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="bg-bg">
+    <div class="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <p class="readout text-brand-2">{tr('products.eyebrow')}</p>
+      <h2 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">{tr('products.title')}</h2>
+      <div class="mt-14 grid gap-px overflow-hidden rounded-xl border border-line-light bg-line-light md:grid-cols-3">
+        {products.map((p, i) => (
+          <a href={`/en/products/${p.id}`} class="reveal group flex flex-col bg-bg p-8 transition-colors hover:bg-bg-2" style={`transition-delay:${i * 80}ms`}>
+            <span class="readout text-tx-muted">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mt-4 font-mono text-2xl font-semibold text-tx">{p.data.name}</h3>
+            <p class="mt-2 text-base font-medium text-brand">{p.data.tagline}</p>
+            <p class="mt-4 flex-1 leading-relaxed text-tx-muted">{p.data.summary}</p>
+            <span class="readout mt-7 inline-flex items-center gap-1.5 text-tx-2 group-hover:text-brand">{tr('products.more')} →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="border-t border-line-light bg-bg-2">
+    <div class="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <div class="grid items-start gap-14 md:grid-cols-2">
+        <div>
+          <p class="readout text-brand-2">{tr('about.eyebrow')}</p>
+          <h2 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">{tr('about.title')}</h2>
+          <p class="mt-6 text-lg leading-relaxed text-tx-muted">{tr('about.sub')}</p>
+          <blockquote class="mt-8 border-l-4 border-brand pl-5 text-lg italic text-tx-2">
+            {tr('about.vision')}
+          </blockquote>
+          <div class="mt-7 rounded-xl border border-line-light bg-bg p-6">
+            <p class="readout mb-2 text-brand-2">{tr('about.s5.title')}</p>
+            <p class="text-base tracking-wide text-tx-muted">{tr('about.s5.items')}</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          {serviceAreas.map((area) => (
+            <div class="reveal relative overflow-hidden rounded-xl">
+              <img src={area.img} alt={area.label} class="h-48 w-full object-cover" />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 to-transparent px-4 pb-4 pt-8">
+                <span class="readout text-xs font-medium text-white">{area.label}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  {news.length > 0 && (
+  <section id="news" class="border-t border-line-light bg-bg">
+    <div class="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <p class="readout text-brand-2">{tr('news.eyebrow')}</p>
+      <h2 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">{tr('news.title')}</h2>
+      <div class="mt-14 grid gap-5 md:grid-cols-3">
+        {news.map((item, i) => (
+          <a href={`/news/${item.id}`} class="reveal group flex flex-col rounded-xl border border-line-light bg-bg p-8 transition-all hover:border-brand hover:shadow-md" style={`transition-delay:${i * 80}ms`}>
+            <time class="readout text-brand" datetime={item.data.date.toISOString()}>
+              {item.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            <h3 class="mt-4 text-lg font-semibold leading-snug text-tx">{item.data.title}</h3>
+            {item.data.excerpt && (
+              <p class="mt-3 flex-1 leading-relaxed text-tx-muted">{item.data.excerpt}</p>
+            )}
+            <span class="readout mt-6 inline-flex items-center gap-1.5 text-tx-muted group-hover:text-brand">Read more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  )}
+
+  <!-- PARTNERS -->
+  <section id="partners" class="border-t border-line-light bg-bg-2">
+    <div class="mx-auto max-w-6xl px-6 py-24 md:py-32">
+      <p class="readout text-brand-2">{tr('partners.eyebrow')}</p>
+      <h2 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">{tr('partners.title')}</h2>
+      <p class="mt-5 max-w-xl text-lg leading-relaxed text-tx-muted">{tr('partners.sub')}</p>
+      <div class="mt-14 grid grid-cols-3 gap-4 sm:grid-cols-5">
+        {clientLogos.map((logo, i) => (
+          <div class="reveal flex items-center justify-center rounded-xl border border-line-light bg-bg px-5 py-6 transition-colors hover:border-brand" style={`transition-delay:${i * 40}ms`}>
+            <img src={logo.src} alt={logo.alt} class="h-10 w-full object-contain" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="border-t border-line-light bg-bg">
+    <div class="mx-auto grid max-w-6xl gap-14 px-6 py-24 md:grid-cols-2 md:py-32">
+      <div>
+        <p class="readout text-brand-2">{tr('contact.eyebrow')}</p>
+        <h2 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">{tr('contact.title')}</h2>
+        <p class="mt-5 max-w-md text-lg leading-relaxed text-tx-muted">{tr('contact.sub')}</p>
+      </div>
+      <form action="https://formspree.io/f/your-id" method="POST" class="grid gap-4">
+        <input name="name" required placeholder={tr('contact.name')}
+          class="rounded-lg border border-line-light bg-bg-3 px-5 py-3.5 text-base text-tx placeholder:text-tx-muted focus:border-brand focus:outline-none" />
+        <input name="org" placeholder={tr('contact.org')}
+          class="rounded-lg border border-line-light bg-bg-3 px-5 py-3.5 text-base text-tx placeholder:text-tx-muted focus:border-brand focus:outline-none" />
+        <input type="email" name="email" required placeholder={tr('contact.email')}
+          class="rounded-lg border border-line-light bg-bg-3 px-5 py-3.5 text-base text-tx placeholder:text-tx-muted focus:border-brand focus:outline-none" />
+        <textarea name="message" rows="4" placeholder={tr('contact.msg')}
+          class="rounded-lg border border-line-light bg-bg-3 px-5 py-3.5 text-base text-tx placeholder:text-tx-muted focus:border-brand focus:outline-none"></textarea>
+        <button type="submit"
+          class="justify-self-start rounded-lg bg-brand px-7 py-3.5 font-semibold text-white transition-colors hover:bg-brand-2">{tr('contact.send')}</button>
+      </form>
+    </div>
+  </section>
+
+</Base>

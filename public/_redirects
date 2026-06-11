@@ -1,0 +1,8 @@
+# 舊站 .html 網址 → 新站（保住既有 SEO）。部署到 Cloudflare Pages / Netlify 皆適用。
+/zh/index.html              /             301
+/index.html                 /en/          301
+/product_01_C.html          /#products    301
+/product_01.html            /en/#products  301
+/zh/about.html              /#about       301
+/zh/service_01.html         /#products    301
+# 視實際舊網址逐條補上…
