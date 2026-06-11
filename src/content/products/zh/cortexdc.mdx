@@ -32,148 +32,182 @@ useCases:
 
 <div class="not-prose space-y-24">
 
-{/* ── 圖分析引擎 ── */}
-<section>
-  <div class="mb-10 text-center">
-    <p class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-2">GRAPH ANALYTICS ENGINE</p>
-    <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx">一張圖，同時回答三個問題</h2>
-    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tx-muted">
-      基於 Apache AGE 圖資料庫，將機架、服務、電力、網路、合約收斂成一張可查詢的拓樸圖。
-    </p>
-  </div>
-  <div class="grid gap-5 md:grid-cols-3">
-    <div class="rounded-2xl border border-line-light bg-bg p-7 shadow-sm">
-      <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
-        <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/></svg>
-      </div>
-      <h3 class="text-lg font-semibold text-tx">衝擊分析</h3>
-      <p class="mt-1 text-sm font-medium text-brand">Impact Analysis</p>
-      <p class="mt-3 leading-relaxed text-tx-muted">一台設備下線，哪些業務服務會受影響？數秒內追蹤下游依賴，計算影響範圍。</p>
+  <section>
+    <div class="mb-10 text-center">
+      <p class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-2">GRAPH ANALYTICS ENGINE</p>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx">一張圖，同時回答三個問題</h2>
+      <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tx-muted">基於 Apache AGE 圖資料庫，將機架、服務、電力、網路、合約收斂成一張可查詢的拓樸圖。</p>
     </div>
-    <div class="rounded-2xl border border-line-light bg-bg p-7 shadow-sm">
-      <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
-        <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
+    <div class="grid gap-5 md:grid-cols-3">
+      <div class="rounded-2xl border border-line-light bg-bg p-7 shadow-sm">
+        <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
+          <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/></svg>
+        </div>
+        <h3 class="text-lg font-semibold text-tx">衝擊分析</h3>
+        <p class="mt-1 text-sm font-medium text-brand">Impact Analysis</p>
+        <p class="mt-3 leading-relaxed text-tx-muted">一台設備下線，哪些業務服務會受影響？數秒內追蹤下游依賴，計算影響範圍。</p>
       </div>
-      <h3 class="text-lg font-semibold text-tx">關聯分析</h3>
-      <p class="mt-1 text-sm font-medium text-brand">Correlation Analysis</p>
-      <p class="mt-3 leading-relaxed text-tx-muted">服務 / 資產 / 機架 / 電力路徑的相依關係與共同風險點，為備援規劃與維護策略提供依據。</p>
-    </div>
-    <div class="rounded-2xl border border-line-light bg-bg p-7 shadow-sm">
-      <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
-        <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <div class="rounded-2xl border border-line-light bg-bg p-7 shadow-sm">
+        <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
+          <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
+        </div>
+        <h3 class="text-lg font-semibold text-tx">關聯分析</h3>
+        <p class="mt-1 text-sm font-medium text-brand">Correlation Analysis</p>
+        <p class="mt-3 leading-relaxed text-tx-muted">服務 / 資產 / 機架 / 電力路徑的相依關係與共同風險點，為備援規劃與維護策略提供依據。</p>
       </div>
-      <h3 class="text-lg font-semibold text-tx">根因分析</h3>
-      <p class="mt-1 text-sm font-medium text-brand">Root Cause Analysis</p>
-      <p class="mt-3 leading-relaxed text-tx-muted">從告警反向追蹤事件鏈，自動定位源頭節點，並產生事件報告。</p>
+      <div class="rounded-2xl border border-line-light bg-bg p-7 shadow-sm">
+        <div class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand/10">
+          <svg class="h-5 w-5 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 class="text-lg font-semibold text-tx">根因分析</h3>
+        <p class="mt-1 text-sm font-medium text-brand">Root Cause Analysis</p>
+        <p class="mt-3 leading-relaxed text-tx-muted">從告警反向追蹤事件鏈，自動定位源頭節點，並產生事件報告。</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-{/* ── 8 大協定 ── */}
-<section>
-  <div class="mb-10 text-center">
-    <p class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-2">PROTOCOL SUPPORT</p>
-    <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx">8 大協定，18 個收集器</h2>
-    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tx-muted">
-      一條事件流收斂所有設備資料，無論品牌、廠商、協定。
-    </p>
-  </div>
-  <div class="overflow-hidden rounded-2xl border border-line-light shadow-sm">
-    {[
-      { proto: 'Redfish (HTTPS)', target: 'iLO / iDRAC / BMC', use: '伺服器硬體監控' },
-      { proto: 'SNMP v1/v2c/v3', target: '交換器 / PDU / UPS', use: '網路設備監控' },
-      { proto: 'IPMI / RMCP',    target: '伺服器 BMC',          use: '硬體管理' },
-      { proto: 'Modbus TCP',     target: 'PDU / 環境感測器',    use: '工業設備' },
-      { proto: 'BACnet/IP',      target: 'HVAC / 電力系統',     use: '樓控設備' },
-      { proto: 'MQTT',           target: 'IoT 感測器',          use: 'IoT 資料匯入' },
-      { proto: 'SSH',            target: '網路設備 CLI',        use: '指令列採集' },
-      { proto: 'RTSP',           target: 'IP Camera',           use: '影像串流監控' },
-    ].map((row, i) => (
-      <div class={`flex items-center gap-4 px-6 py-4 ${i % 2 === 0 ? 'bg-bg' : 'bg-bg-2'}`}>
-        <span class="w-44 shrink-0 font-mono text-sm font-semibold text-brand">{row.proto}</span>
-        <span class="flex-1 text-sm text-tx">{row.target}</span>
-        <span class="hidden rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-2 sm:block">{row.use}</span>
+  <section>
+    <div class="mb-10 text-center">
+      <p class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-2">PROTOCOL SUPPORT</p>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx">8 大協定，18 個收集器</h2>
+      <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tx-muted">一條事件流收斂所有設備資料，無論品牌、廠商、協定。</p>
+    </div>
+    <div class="overflow-hidden rounded-2xl border border-line-light shadow-sm">
+      <div class="flex items-center gap-4 bg-bg px-6 py-4">
+        <span class="w-44 shrink-0 font-mono text-sm font-semibold text-brand">Redfish (HTTPS)</span>
+        <span class="flex-1 text-sm text-tx">iLO / iDRAC / BMC</span>
+        <span class="hidden rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-2 sm:block">伺服器硬體監控</span>
       </div>
-    ))}
-  </div>
-</section>
+      <div class="flex items-center gap-4 bg-bg-2 px-6 py-4">
+        <span class="w-44 shrink-0 font-mono text-sm font-semibold text-brand">SNMP v1/v2c/v3</span>
+        <span class="flex-1 text-sm text-tx">交換器 / PDU / UPS</span>
+        <span class="hidden rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-2 sm:block">網路設備監控</span>
+      </div>
+      <div class="flex items-center gap-4 bg-bg px-6 py-4">
+        <span class="w-44 shrink-0 font-mono text-sm font-semibold text-brand">IPMI / RMCP</span>
+        <span class="flex-1 text-sm text-tx">伺服器 BMC</span>
+        <span class="hidden rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-2 sm:block">硬體管理</span>
+      </div>
+      <div class="flex items-center gap-4 bg-bg-2 px-6 py-4">
+        <span class="w-44 shrink-0 font-mono text-sm font-semibold text-brand">Modbus TCP</span>
+        <span class="flex-1 text-sm text-tx">PDU / 環境感測器</span>
+        <span class="hidden rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-2 sm:block">工業設備</span>
+      </div>
+      <div class="flex items-center gap-4 bg-bg px-6 py-4">
+        <span class="w-44 shrink-0 font-mono text-sm font-semibold text-brand">BACnet/IP</span>
+        <span class="flex-1 text-sm text-tx">HVAC / 電力系統</span>
+        <span class="hidden rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-2 sm:block">樓控設備</span>
+      </div>
+      <div class="flex items-center gap-4 bg-bg-2 px-6 py-4">
+        <span class="w-44 shrink-0 font-mono text-sm font-semibold text-brand">MQTT</span>
+        <span class="flex-1 text-sm text-tx">IoT 感測器</span>
+        <span class="hidden rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-2 sm:block">IoT 資料匯入</span>
+      </div>
+      <div class="flex items-center gap-4 bg-bg px-6 py-4">
+        <span class="w-44 shrink-0 font-mono text-sm font-semibold text-brand">SSH</span>
+        <span class="flex-1 text-sm text-tx">網路設備 CLI</span>
+        <span class="hidden rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-2 sm:block">指令列採集</span>
+      </div>
+      <div class="flex items-center gap-4 bg-bg-2 px-6 py-4">
+        <span class="w-44 shrink-0 font-mono text-sm font-semibold text-brand">RTSP</span>
+        <span class="flex-1 text-sm text-tx">IP Camera</span>
+        <span class="hidden rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand-2 sm:block">影像串流監控</span>
+      </div>
+    </div>
+  </section>
 
-{/* ── 4 週 PoC ── */}
-<section>
-  <div class="mb-10 text-center">
-    <p class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-2">PROOF OF CONCEPT</p>
-    <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx">4 週，從環境到客戶匯報</h2>
-    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tx-muted">
-      標準化 PoC 範本，讓客戶在一個月內看到真實成效。
-    </p>
-  </div>
-  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-    {[
-      { week: '第 1 週', title: '環境部署', items: ['硬體驗收', '容器部署', 'TLS 憑證', 'RBAC 規劃'] },
-      { week: '第 2 週', title: '協定接入', items: ['Redfish iLO/iDRAC', 'SNMP 交換器', 'Modbus PDU', 'MQTT 感測器'] },
-      { week: '第 3 週', title: 'Canvas 拓樸', items: ['平面圖 Canvas', '機架正背面視圖', '資產關係', 'IP 管理'] },
-      { week: '第 4 週', title: '報表與匯報', items: ['合規報表', '衝擊分析', '事件報告', '決策層展示'] },
-    ].map((w, i) => (
-      <div class="relative rounded-2xl border border-line-light bg-bg p-6 shadow-sm">
+  <section>
+    <div class="mb-10 text-center">
+      <p class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-2">PROOF OF CONCEPT</p>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx">4 週，從環境到客戶匯報</h2>
+      <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tx-muted">標準化 PoC 範本，讓客戶在一個月內看到真實成效。</p>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-2xl border border-line-light bg-bg p-6 shadow-sm">
         <div class="mb-4 flex items-center gap-3">
-          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">{i+1}</span>
-          <div>
-            <p class="font-mono text-xs text-tx-muted">{w.week}</p>
-            <p class="font-semibold text-tx">{w.title}</p>
-          </div>
+          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">1</span>
+          <div><p class="font-mono text-xs text-tx-muted">第 1 週</p><p class="font-semibold text-tx">環境部署</p></div>
         </div>
         <ul class="space-y-2">
-          {w.items.map(item => (
-            <li class="flex items-center gap-2 text-sm text-tx-muted">
-              <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>
-              {item}
-            </li>
-          ))}
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>硬體驗收</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>容器部署</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>TLS 憑證</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>RBAC 規劃</li>
         </ul>
       </div>
-    ))}
-  </div>
-</section>
+      <div class="rounded-2xl border border-line-light bg-bg p-6 shadow-sm">
+        <div class="mb-4 flex items-center gap-3">
+          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">2</span>
+          <div><p class="font-mono text-xs text-tx-muted">第 2 週</p><p class="font-semibold text-tx">協定接入</p></div>
+        </div>
+        <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>Redfish iLO/iDRAC</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>SNMP 交換器</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>Modbus PDU</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>MQTT 感測器</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-line-light bg-bg p-6 shadow-sm">
+        <div class="mb-4 flex items-center gap-3">
+          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">3</span>
+          <div><p class="font-mono text-xs text-tx-muted">第 3 週</p><p class="font-semibold text-tx">Canvas 拓樸</p></div>
+        </div>
+        <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>平面圖 Canvas</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>機架正背面視圖</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>資產關係</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>IP 管理</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-line-light bg-bg p-6 shadow-sm">
+        <div class="mb-4 flex items-center gap-3">
+          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">4</span>
+          <div><p class="font-mono text-xs text-tx-muted">第 4 週</p><p class="font-semibold text-tx">報表與匯報</p></div>
+        </div>
+        <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>合規報表</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>衝擊分析</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>事件報告</li>
+          <li class="flex items-center gap-2 text-sm text-tx-muted"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>決策層展示</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-{/* ── 兩種方案 ── */}
-<section>
-  <div class="mb-10 text-center">
-    <p class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-2">PACKAGES</p>
-    <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx">兩種方案，一個平台</h2>
-    <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tx-muted">
-      兩種方案皆可單獨導入，後續再合併為完整平台。
-    </p>
-  </div>
-  <div class="grid gap-6 md:grid-cols-2">
-    <div class="rounded-2xl border-2 border-brand/30 bg-bg p-8 shadow-sm">
-      <div class="mb-5 inline-flex rounded-xl bg-brand/10 px-3 py-1.5">
-        <span class="font-mono text-xs font-bold text-brand">IT 基礎包</span>
-      </div>
-      <h3 class="text-xl font-semibold text-tx">一站式 IT 基礎設施可視化</h3>
-      <p class="mt-3 leading-relaxed text-tx-muted">適合以伺服器、虛擬化、網路設備管理為核心，需要統一可視化的客戶。</p>
-      <ul class="mt-6 space-y-2.5">
-        {['多協定設備採集（Redfish、SNMP、IPMI、SSH）','虛擬化與容器整合（VMware、Proxmox）','機架與資產管理','網路 IPAM 與纜線管理'].map(i => (
-          <li class="flex items-start gap-2 text-sm text-tx-muted">
-            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>{i}
-          </li>
-        ))}
-      </ul>
+  <section>
+    <div class="mb-10 text-center">
+      <p class="font-mono text-xs font-semibold uppercase tracking-widest text-brand-2">PACKAGES</p>
+      <h2 class="mt-2 text-3xl font-semibold tracking-tight text-tx">兩種方案，一個平台</h2>
+      <p class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tx-muted">兩種方案皆可單獨導入，後續再合併為完整平台。</p>
     </div>
-    <div class="rounded-2xl border-2 border-brand bg-ink p-8 shadow-lg">
-      <div class="mb-5 inline-flex rounded-xl bg-brand px-3 py-1.5">
-        <span class="font-mono text-xs font-bold text-white">OT 現場包</span>
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="rounded-2xl border-2 border-brand/30 bg-bg p-8 shadow-sm">
+        <div class="mb-5 inline-flex rounded-xl bg-brand/10 px-3 py-1.5">
+          <span class="font-mono text-xs font-bold text-brand">IT 基礎包</span>
+        </div>
+        <h3 class="text-xl font-semibold text-tx">一站式 IT 基礎設施可視化</h3>
+        <p class="mt-3 leading-relaxed text-tx-muted">適合以伺服器、虛擬化、網路設備管理為核心，需要統一可視化的客戶。</p>
+        <ul class="mt-6 space-y-2.5">
+          <li class="flex items-start gap-2 text-sm text-tx-muted"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>多協定設備採集（Redfish、SNMP、IPMI、SSH）</li>
+          <li class="flex items-start gap-2 text-sm text-tx-muted"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>虛擬化與容器整合（VMware、Proxmox）</li>
+          <li class="flex items-start gap-2 text-sm text-tx-muted"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>機架與資產管理</li>
+          <li class="flex items-start gap-2 text-sm text-tx-muted"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>網路 IPAM 與纜線管理</li>
+        </ul>
       </div>
-      <h3 class="text-xl font-semibold text-tx-invert">從 PLC 到 UPS，一張圖全看見</h3>
-      <p class="mt-3 leading-relaxed text-tx-invert-muted">適合電力、空調、感測器、CCTV 分散管理，需要跨 IT＋OT 整合的客戶。</p>
-      <ul class="mt-6 space-y-2.5">
-        {['工業協定接入（Modbus、BACnet、MQTT）','電力設施管理（UPS/PDU、PUE 計算）','冷熱走道視覺化','IP Camera RTSP 影像整合'].map(i => (
-          <li class="flex items-start gap-2 text-sm text-tx-invert-muted">
-            <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>{i}
-          </li>
-        ))}
-      </ul>
+      <div class="rounded-2xl border-2 border-brand bg-ink p-8 shadow-lg">
+        <div class="mb-5 inline-flex rounded-xl bg-brand px-3 py-1.5">
+          <span class="font-mono text-xs font-bold text-white">OT 現場包</span>
+        </div>
+        <h3 class="text-xl font-semibold text-tx-invert">從 PLC 到 UPS，一張圖全看見</h3>
+        <p class="mt-3 leading-relaxed text-tx-invert-muted">適合電力、空調、感測器、CCTV 分散管理，需要跨 IT＋OT 整合的客戶。</p>
+        <ul class="mt-6 space-y-2.5">
+          <li class="flex items-start gap-2 text-sm text-tx-invert-muted"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>工業協定接入（Modbus、BACnet、MQTT）</li>
+          <li class="flex items-start gap-2 text-sm text-tx-invert-muted"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>電力設施管理（UPS/PDU、PUE 計算）</li>
+          <li class="flex items-start gap-2 text-sm text-tx-invert-muted"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>冷熱走道視覺化</li>
+          <li class="flex items-start gap-2 text-sm text-tx-invert-muted"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>IP Camera RTSP 影像整合</li>
+        </ul>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
 </div>
